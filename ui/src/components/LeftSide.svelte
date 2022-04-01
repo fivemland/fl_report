@@ -1,5 +1,5 @@
 <script>
-  import { myUser, users, selectedUser } from '../stores.js';
+  import { myUser, users, selectedUser, selectedId } from '../stores.js';
 
   let search = '';
 
@@ -12,7 +12,7 @@
   function selectUser(user) {
     if (!user.identifier) return;
 
-    selectedUser.set(user);
+    selectedId.set(user.identifier);
   }
 </script>
 

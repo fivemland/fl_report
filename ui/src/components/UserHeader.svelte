@@ -10,7 +10,7 @@
   <div>
     <div class="text-2xl">
       <i class="fa-solid fa-user" />
-      {$selectedUser.charName}
+      {$selectedUser.charName || 'Unknown'}
       <div class={`badge text-gray-900 ${$selectedUser.online ? 'bg-success' : 'bg-error'}`}>
         {$selectedUser.online ? 'Online' : 'Offline'}
       </div>
@@ -44,7 +44,7 @@
     </div>
     <div class="tooltip tooltip-left" data-tip="Revive">
       <button class="mt-1 ml-1 btn btn-circle btn-xs btn-warning">
-        <i class="fa-solid fa-skull-crossbones" />
+        <i class="fa-solid fa-hand-holding-medical" />
       </button>
     </div>
 
@@ -58,7 +58,7 @@
     <input type="checkbox" id="user-information-modal" class="modal-toggle" />
     <div class="modal">
       <div class="modal-box relative bg-gray-700">
-        <label for="user-information-modal" class="text-xl text-error absolute right-3 top-2">
+        <label for="user-information-modal" class="text-xl text-error absolute right-3 top-2 cursor-pointer">
           <i class="fa-solid fa-xmark" />
         </label>
         <h3 class="text-lg font-bold">
