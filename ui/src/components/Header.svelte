@@ -1,8 +1,8 @@
 <script>
-  import { visible } from '../stores';
+  import { visible, updateVisible } from '../stores';
 
   function close() {
-    visible.set(!$visible);
+    updateVisible(!$visible);
   }
 </script>
 

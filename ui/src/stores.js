@@ -2,11 +2,15 @@ import { writable, derived } from 'svelte/store';
 
 export const visible = writable(true);
 
+export function updateVisible(state) {
+  visible.set(state);
+  if (!state) fetch(`https://${GetParentResourceName()}/close`);
+}
+
 export const myUser = writable({
   serverId: 1,
   identifier: '0800fc577294c34e0b28ad2839435945',
   name: 'Csoki',
-  charName: 'Clark Melton',
 });
 
 export const users = writable([
@@ -42,4 +46,12 @@ export const selectedUser = derived([users, selectedId], ([$users, $selectedId])
   });
 
   return filtered.length > 0 ? filtered[0] : false;
+});
+
+window.addEventListener('message', ({ data }) => {
+  if (data.visible !== undefined) updateVisible(data.visible);
+
+  if (data.myUser !== undefined) myUser.set(data.myUser);
+
+  if (data.users !== undefined) users.set(data.users);
 });

@@ -4,7 +4,7 @@
   import Messages from './components/Messages.svelte';
   import UserHeader from './components/UserHeader.svelte';
 
-  import { visible, myUser, selectedId, users } from './stores.js';
+  import { visible, myUser, selectedId, selectedUser, users } from './stores.js';
 
   const FLOOD_TIME = 250;
 
@@ -50,7 +50,7 @@
   }
 </script>
 
-<main class="w-screen h-screen flex justify-center items-center">
+<main class="w-screen h-screen flex justify-center items-center select-none">
   {#if $visible}
     <div class="bg-slate-800 w-5/6 p-2 rounded-lg">
       <Header />
@@ -60,20 +60,28 @@
 
         <div class="w-full rounded-box">
           <div id="rightside" class="mb-3 p-1 rounded-lg bg-slate-700">
-            <UserHeader />
+            {#if $selectedUser}
+              <UserHeader />
 
-            <Messages />
+              <Messages />
+            {:else}
+              <div class="text-xl text-center mt-8">No player selected</div>
+            {/if}
           </div>
 
           <div id="inputs" class="flex items-center">
             <textarea
               on:keydown={textareaKeydown}
               bind:value={messageText}
-              disabled={inputsDisabled}
+              disabled={!$selectedUser}
               class="h-10 w-full textarea textarea-accent"
               placeholder="Message"
             />
-            <button on:click={sendMessage} disabled={!messageText || messageText.length <= 0 || inputsDisabled} class="ml-1 btn btn-accent">
+            <button
+              on:click={sendMessage}
+              disabled={!messageText || messageText.length <= 0 || inputsDisabled || !$selectedUser}
+              class="ml-1 btn btn-accent"
+            >
               <i class="fa-solid fa-paper-plane" />
             </button>
           </div>
