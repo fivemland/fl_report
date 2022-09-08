@@ -15,7 +15,7 @@ ESX.RegisterServerCallback("requestUserData", function(player, cb, identifier)
 	for _, account in pairs(xPlayer.getAccounts()) do
 		table.insert(userData, {
 			account.label,
-			account.money .. " " .. MONEY_UNIT,
+			tostring(account.money):format(MONEY_UNIT)
 		})
 	end
 
@@ -33,7 +33,7 @@ ESX.RegisterServerCallback("requestUserData", function(player, cb, identifier)
 
 	table.insert(userData, {
 		"Job Salary",
-		job.grade_salary .. " " .. MONEY_UNIT,
+		tostring(job.grade_salary):format(MONEY_UNIT)
 	})
 
 	print(ESX.DumpTable(xPlayer.getJob()))
