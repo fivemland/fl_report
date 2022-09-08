@@ -1,5 +1,6 @@
 ESX.RegisterServerCallback("requestUserData", function(player, cb, identifier)
 	print(identifier)
+	print(ESX.GetPlayerFromId(player).identifier)
 
 	local xPlayer = ESX.GetPlayerFromIdentifier(identifier)
 	if not xPlayer then
@@ -15,7 +16,7 @@ ESX.RegisterServerCallback("requestUserData", function(player, cb, identifier)
 	for _, account in pairs(xPlayer.getAccounts()) do
 		table.insert(userData, {
 			account.label,
-			tostring(account.money):format(MONEY_UNIT)
+			MONEY_UNIT:format(account.money)
 		})
 	end
 
@@ -33,7 +34,7 @@ ESX.RegisterServerCallback("requestUserData", function(player, cb, identifier)
 
 	table.insert(userData, {
 		"Job Salary",
-		tostring(job.grade_salary):format(MONEY_UNIT)
+		MONEY_UNIT:format(job.grade_salary)
 	})
 
 	print(ESX.DumpTable(xPlayer.getJob()))
